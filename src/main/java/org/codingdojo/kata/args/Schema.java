@@ -28,10 +28,15 @@ public class Schema {
     }
 
     public String typeOf(String label) {
+        ArgSpec argSpec = specOf(label);
+        return argSpec.type;
+    }
+
+    public ArgSpec specOf(String label) {
         Optional<ArgSpec> candidate = argSpecs.stream().filter(argSpec -> argSpec.label.equals(label)).findAny();
         if (candidate.isEmpty()) {
             throw new LabelNotFound(label);
         }
-        return candidate.get().type;
+        return candidate.get();
     }
 }

@@ -61,4 +61,9 @@ public class SchemaTest {
     }
 
     // 7. 想一想，接下来可以如何使用Schema对象？
+    @Test
+    public void should_get_arg_spec_from_schema() {
+        Schema schema = new Schema("l:boolean p:integer d:string");
+        assertThat(schema.specOf("l"), is(new ArgSpec("l:boolean")));
+    }
 }

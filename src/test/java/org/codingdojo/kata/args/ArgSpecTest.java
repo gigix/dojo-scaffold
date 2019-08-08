@@ -12,4 +12,9 @@ public class ArgSpecTest {
         assertThat(argSpec.label, is("l"));
         assertThat(argSpec.type, is("boolean"));
     }
+
+    @Test
+    public void should_support_literal_equality() {
+        assertThat(new ArgSpec("l:boolean"), is(new ArgSpec("l:boolean")));
+    }
 }
