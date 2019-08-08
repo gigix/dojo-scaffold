@@ -29,4 +29,8 @@ public class ArgSpec {
     public boolean isTypeOf(String type) {
         return this.type.equals(type);
     }
+
+    public boolean isOfLabel(String label) {
+        return this.label.equals(label);
+    }
 }

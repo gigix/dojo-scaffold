@@ -10,17 +10,23 @@ import static java.util.stream.Collectors.toSet;
 
 public class Schema {
     private final List<ArgSpec> argSpecs;
+    private String rawText;
 
     public Schema(String text) {
         argSpecs = newArrayList(text.split(" ")).stream().map(ArgSpec::new).collect(toList());
-        validate(text);
+        rawText = text;
+        validate();
     }
 
-    private void validate(String text) {
-        Set<String> labelsWithoutDuplicate = argSpecs.stream().map(argSpec -> argSpec.label).collect(toSet());
-        if(labelsWithoutDuplicate.size() < argSpecs.size()) {
-            throw new InvalidSchema(text);
+    private void validate() {
+        if(hasLabelDuplication()) {
+            throw new InvalidSchema(rawText);
         }
+    }
+
+    private boolean hasLabelDuplication() {
+        long labelsWithoutDuplication = argSpecs.stream().map(argSpec -> argSpec.label).distinct().count();
+        return labelsWithoutDuplication < argSpecs.size();
     }
 
     public int size() {
@@ -33,10 +39,11 @@ public class Schema {
     }
 
     public ArgSpec specOf(String label) {
-        Optional<ArgSpec> candidate = argSpecs.stream().filter(argSpec -> argSpec.label.equals(label)).findAny();
+        Optional<ArgSpec> candidate = argSpecs.stream().filter(argSpec -> argSpec.isOfLabel(label)).findAny();
         if (candidate.isEmpty()) {
             throw new LabelNotFound(label);
         }
         return candidate.get();
     }
+
 }

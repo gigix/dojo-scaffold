@@ -17,6 +17,7 @@ public class Args {
     }
 
     public Object valueOf(String label) {
-        return args.stream().filter(arg -> arg.label.equals(label)).findAny().get().value();
+        return args.stream().filter(arg -> arg.isOfLabel(label)).findAny().get().value();
     }
+
 }
