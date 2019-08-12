@@ -16,6 +16,9 @@ public class Arg {
     }
 
     public Object value() {
+        // TODO: 重构消除switch...case...
+        //  《重构》介绍了一个重构手法，叫做"用多态替代switch语句"
+        //  请照着这个重构手法操作，消除这里的switch语句
         switch (argSpec.type) {
             case "boolean":
                 return parseBoolean(rawValue);
