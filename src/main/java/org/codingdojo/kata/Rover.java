@@ -1,7 +1,5 @@
 package org.codingdojo.kata;
 
-import java.util.Arrays;
-
 import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.Integer.valueOf;
 
