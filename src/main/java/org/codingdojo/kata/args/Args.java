@@ -19,7 +19,7 @@ public class Args {
 
     public Object valueOf(String label) {
         Optional<Arg> matchingArg = args.stream().filter(arg -> arg.withLabel(label)).findFirst();
-        if(matchingArg.isEmpty()) {
+        if(!matchingArg.isPresent()) {
             throw new LabelNotFound(label);
         }
         return matchingArg.get().value();
