@@ -40,7 +40,7 @@ public class Schema {
 
     public ArgSpec specOf(String label) {
         Optional<ArgSpec> candidate = argSpecs.stream().filter(argSpec -> argSpec.isOfLabel(label)).findAny();
-        if (candidate.isEmpty()) {
+        if (!candidate.isPresent()) {
             throw new LabelNotFound(label);
         }
         return candidate.get();
