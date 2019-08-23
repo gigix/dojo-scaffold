@@ -1,29 +1,9 @@
 package com.gildedrose;
 
-import com.gildedrose.items.AgedBrie;
-import com.gildedrose.items.BackstagePass;
-import com.gildedrose.items.Sulfuras;
-
 public class Item {
     public String name;
     public int sellIn;
     public int quality;
-
-    static public Item createNormalItem(String name, int sellIn, int quality) {
-        return new Item(name, sellIn, quality);
-    }
-
-    static public Item createBackstagePass(int sellIn, int quality) {
-        return new BackstagePass(sellIn, quality);
-    }
-
-    static public Item createAgedBrie(int sellIn, int quality) {
-        return new AgedBrie(sellIn, quality);
-    }
-
-    static public Item createSulfuras(int sellIn, int quality) {
-        return new Sulfuras(sellIn, quality);
-    }
 
     protected Item(String name, int sellIn, int quality) {
         this.name = name;
@@ -36,16 +16,16 @@ public class Item {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
-    boolean isSulfuras() {
-        return name.equals("Sulfuras, Hand of Ragnaros");
+    protected boolean isSulfuras() {
+        return false;
     }
 
-    boolean isAgedBrie() {
-        return name.equals("Aged Brie");
+    protected boolean isAgedBrie() {
+        return false;
     }
 
-    boolean isBackstagePass() {
-        return name.equals("Backstage passes to a TAFKAL80ETC concert");
+    protected boolean isBackstagePass() {
+        return false;
     }
 
     boolean isBetterQualityWhenTimeGoesBy() {
