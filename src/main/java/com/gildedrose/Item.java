@@ -28,10 +28,6 @@ public class Item {
         return false;
     }
 
-    boolean isBetterQualityWhenTimeGoesBy() {
-        return isAgedBrie() || isBackstagePass();
-    }
-
     public void passOneDay() {
         updateSellInDays();
         updateQuality();
@@ -41,31 +37,9 @@ public class Item {
         }
     }
 
-    private void updateQuality() {
-        if (!isBetterQualityWhenTimeGoesBy()) {
-            if (quality > 0) {
-                if (!isSulfuras()) {
-                    quality = quality - 1;
-                }
-            }
-        } else {
-            if (quality < 50) {
-                quality = quality + 1;
-
-                if (isBackstagePass()) {
-                    if (sellIn < 10) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-
-                    if (sellIn < 5) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-                }
-            }
+    protected void updateQuality() {
+        if (quality > 0) {
+            quality = quality - 1;
         }
     }
 
