@@ -1,14 +1,31 @@
 package com.gildedrose;
 
+import com.gildedrose.items.AgedBrie;
+import com.gildedrose.items.BackstagePass;
+import com.gildedrose.items.Sulfuras;
+
 public class Item {
-
     public String name;
-
     public int sellIn;
-
     public int quality;
 
-    public Item(String name, int sellIn, int quality) {
+    static public Item createNormalItem(String name, int sellIn, int quality) {
+        return new Item(name, sellIn, quality);
+    }
+
+    static public Item createBackstagePass(int sellIn, int quality) {
+        return new BackstagePass(sellIn, quality);
+    }
+
+    static public Item createAgedBrie(int sellIn, int quality) {
+        return new AgedBrie(sellIn, quality);
+    }
+
+    static public Item createSulfuras(int sellIn, int quality) {
+        return new Sulfuras(sellIn, quality);
+    }
+
+    protected Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
