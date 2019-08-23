@@ -32,7 +32,7 @@ public class Item {
         return isAgedBrie() || isBackstagePass();
     }
 
-    void passOneDay() {
+    public void passOneDay() {
         updateSellInDays();
         updateQuality();
 
@@ -69,21 +69,9 @@ public class Item {
         }
     }
 
-    private void updateQualityAfterExpiration() {
-        if (!isAgedBrie()) {
-            if (!isBackstagePass()) {
-                if (quality > 0) {
-                    if (!isSulfuras()) {
-                        quality = quality - 1;
-                    }
-                }
-            } else {
-                quality = 0;
-            }
-        } else {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
+    protected void updateQualityAfterExpiration() {
+        if (quality > 0) {
+            quality = quality - 1;
         }
     }
 
@@ -91,9 +79,7 @@ public class Item {
         return sellIn < 0;
     }
 
-    private void updateSellInDays() {
-        if (!isSulfuras()) {
-            sellIn = sellIn - 1;
-        }
+    protected void updateSellInDays() {
+        sellIn = sellIn - 1;
     }
 }
