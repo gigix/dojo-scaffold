@@ -35,7 +35,16 @@ public class Item {
         return isAgedBrie() || isBackstagePass();
     }
 
-    void updateQualityAndSellInDays() {
+    void passOneDay() {
+        updateSellInDays();
+        updateQuality();
+
+        if (isExpired()) {
+            updateQualityAfterExpiration();
+        }
+    }
+
+    private void updateQuality() {
         if (!isBetterQualityWhenTimeGoesBy()) {
             if (quality > 0) {
                 if (!isSulfuras()) {
@@ -47,13 +56,13 @@ public class Item {
                 quality = quality + 1;
 
                 if (isBackstagePass()) {
-                    if (sellIn < 11) {
+                    if (sellIn < 10) {
                         if (quality < 50) {
                             quality = quality + 1;
                         }
                     }
 
-                    if (sellIn < 6) {
+                    if (sellIn < 5) {
                         if (quality < 50) {
                             quality = quality + 1;
                         }
@@ -61,27 +70,33 @@ public class Item {
                 }
             }
         }
+    }
 
-        if (!isSulfuras()) {
-            sellIn = sellIn - 1;
-        }
-
-        if (sellIn < 0) {
-            if (!isAgedBrie()) {
-                if (!isBackstagePass()) {
-                    if (quality > 0) {
-                        if (!isSulfuras()) {
-                            quality = quality - 1;
-                        }
+    private void updateQualityAfterExpiration() {
+        if (!isAgedBrie()) {
+            if (!isBackstagePass()) {
+                if (quality > 0) {
+                    if (!isSulfuras()) {
+                        quality = quality - 1;
                     }
-                } else {
-                    quality = 0;
                 }
             } else {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                quality = 0;
             }
+        } else {
+            if (quality < 50) {
+                quality = quality + 1;
+            }
+        }
+    }
+
+    private boolean isExpired() {
+        return sellIn < 0;
+    }
+
+    private void updateSellInDays() {
+        if (!isSulfuras()) {
+            sellIn = sellIn - 1;
         }
     }
 }
