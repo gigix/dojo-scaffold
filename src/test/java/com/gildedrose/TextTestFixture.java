@@ -1,37 +1,48 @@
 package com.gildedrose;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+
+import java.io.PrintStream;
+
+import static com.gildedrose.Item.*;
+
 public class TextTestFixture {
     public static void main(String[] args) {
-        System.out.println("OMGHAI!");
+        String output = overallTestResult(3);
+        System.out.println(output);
+    }
 
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+    public static String overallTestResult(int days) {
+        ByteOutputStream out = new ByteOutputStream();
+        PrintStream outputStream = new PrintStream(out);
+
+        outputStream.println("OMGHAI!");
+
+        Item[] items = new Item[]{
+                createNormalItem("+5 Dexterity Vest", 10, 20), //
+                createAgedBrie(2, 0), //
+                createNormalItem("Elixir of the Mongoose", 5, 7), //
+                createSulfuras(0, 80), //
+                createSulfuras(-1, 80),
+                createBackstagePass(15, 20),
+                createBackstagePass(10, 49),
+                createBackstagePass(5, 49),
                 // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+                createNormalItem("Conjured Mana Cake", 3, 6)};
 
         GildedRose app = new GildedRose(items);
 
-        int days = 2;
-        if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
+        for (int i = 0; i < days; i++) {
+            outputStream.println("-------- day " + i + " --------");
+            outputStream.println("name, sellIn, quality");
+            for (Item item : items) {
+                outputStream.println(item);
+            }
+            outputStream.println();
+            app.passOneDay();
         }
 
-        for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
-            for (Item item : items) {
-                System.out.println(item);
-            }
-            System.out.println();
-            app.updateQuality();
-        }
+        return out.toString();
     }
 
 }
