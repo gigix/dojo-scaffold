@@ -18,6 +18,6 @@ BUILD SUCCESSFUL in 1s
 4 actionable tasks: 4 executed
 ```
 
-用Intellij IDEA导入工程，运行全部测试，你应该看到绿条。
+用Intellij IDEA或Eclipse或者你习惯的任何IDE（但是我强烈建议不要使用IDEA或Eclipse之外的其他IDE）导入工程，运行全部测试，你应该看到绿条。
 
 从这里开始你的Dojo练习。
