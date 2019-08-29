@@ -4,14 +4,13 @@
 
 准备步骤：
 
-* `git clone https://github.com/gigix/dojo-scaffold.git`
-* `mv dojo-scaffold my_kata && cd my_kata`
+* `git clone https://github.com/gigix/dojo-scaffold.git my_kata && cd $_`
 * `./gradlew clean build`
   * 如果你使用Windows，这一步应该是 `gradlew.bat clean build`
 
 此时你应该看到成功的build：
 
-```
+```bash
 $ ./gradlew clean build
 
 BUILD SUCCESSFUL in 1s
